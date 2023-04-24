@@ -11,6 +11,10 @@ var con = mysql.createConnection({
   database: "cool_databas",
 });
 
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/index.html")
+})
+
 app.get("/users", function (req, res) {
   var sql = "SELECT * FROM users";
   con.query(sql, function (err, result, fields) {

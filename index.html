@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dokumentation av dethär APIet</h1>
+    <br>
+    <h2>Routs</h2>
+    <p>GET/users - returnerar alla användare</p>
+    <p>GET/users/{id} - returnerar en användare med specifikt id</p>
+    <p>POST/users - skapar en ny användare och accepterar JSON object på formatet {"username", "password"}</p>
+    <p>PUT/users/{id} - ändrar en befintlig användare med specifikt id och accepterar JSON object med formatet {"username", "password"}</p>
+    <p>POST/login - tar JSON object med formatet {"username", "password"} och jämför det med databasen, om en användare med samma username och password hittas skickas ett fint välkomsmeddelande</p>
+
+</body>
+</html>
