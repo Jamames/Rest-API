@@ -70,6 +70,7 @@ app.get("/users", function (req, res) {
   var sql = "SELECT * FROM users";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
+    result.forEach(user => delete user.password);
     res.send(result);
   });
 });
@@ -79,6 +80,7 @@ app.get("/users/:id", function (req, res) {
   var sql = `SELECT * FROM users WHERE id = ${userId}`;
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
+    result.forEach(user => delete user.password);
     res.send(result);
   });
 });
