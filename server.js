@@ -24,7 +24,7 @@ function checkAuth(req, res, next) {
   let token = authHeader.slice(7);
   try {
     jwt.verify(token, "superduperduperhemlig hemlighet");
-    next(); // Proceed to the next middleware function
+    next();
   } catch (err) {
     console.log(err);
     res.sendStatus(401);
@@ -47,8 +47,8 @@ app.post("/login", function (req, res) {
         let passwordHash = hash(password);
         if (passwordHash === user.password) {
           let payload = {
-            sub: user.id, //sub är obligatorisk
-            name: user.username, //Valbar
+            sub: user.id,
+            name: user.username, 
           };
           let token = jwt.sign(payload, "superduperduperhemlig hemlighet", {expiresIn:"2h"});
           res.send(token);
