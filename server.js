@@ -64,26 +64,6 @@ app.post("/login", function (req, res) {
   }
 });
 
-app.post("/users", function (req, res) {
-  const username = req.body.username;
-  const password = req.body.password;
-  if (username && password) {
-    const hashedPassword = hash(password);
-
-    var sql = `INSERT INTO users (username, password) VALUES ('${username}', '${hashedPassword}')`;
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("1 record inserted");
-      console.log(result);
-      let createdUser = req.body;
-      createdUser.id = result.insertId;
-      res.send(createdUser);
-    });
-  } else {
-    res.sendStatus(422);
-  }
-});
-
 app.use(checkAuth);
 
 app.get("/users", function (req, res) {
@@ -126,6 +106,25 @@ app.put("/users/:id", function (req, res) {
   });
 });
 
+app.post("/users", function (req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username && password) {
+    const hashedPassword = hash(password);
+
+    var sql = `INSERT INTO users (username, password) VALUES ('${username}', '${hashedPassword}')`;
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+      console.log(result);
+      let createdUser = req.body;
+      createdUser.id = result.insertId;
+      res.send(createdUser);
+    });
+  } else {
+    res.sendStatus(422);
+  }
+});
 
 
 app.listen(port, () => {
