@@ -6,7 +6,6 @@ let jwt = require("jsonwebtoken");
 
 app.use(express.json());
 
-
 let mysql = require("mysql");
 var con = mysql.createConnection({
   host: "localhost",
@@ -48,9 +47,11 @@ app.post("/login", function (req, res) {
         if (passwordHash === user.password) {
           let payload = {
             sub: user.id,
-            name: user.username, 
+            name: user.username,
           };
-          let token = jwt.sign(payload, "superduperduperhemlig hemlighet", {expiresIn:"2h"});
+          let token = jwt.sign(payload, "superduperduperhemlig hemlighet", {
+            expiresIn: "2h",
+          });
           res.send(token);
         } else {
           res.status(401).send("Incorrect username or password");
@@ -70,7 +71,7 @@ app.get("/users", function (req, res) {
   var sql = "SELECT * FROM users";
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
-    result.forEach(user => delete user.password);
+    result.forEach((user) => delete user.password);
     res.send(result);
   });
 });
@@ -80,7 +81,7 @@ app.get("/users/:id", function (req, res) {
   var sql = `SELECT * FROM users WHERE id = ${userId}`;
   con.query(sql, function (err, result, fields) {
     if (err) throw err;
-    result.forEach(user => delete user.password);
+    result.forEach((user) => delete user.password);
     res.send(result);
   });
 });
@@ -127,7 +128,6 @@ app.post("/users", function (req, res) {
     res.sendStatus(422);
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
