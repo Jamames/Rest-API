@@ -18,7 +18,7 @@ var con = mysql.createConnection({
 function checkAuth(req, res, next) {
   let authHeader = req.headers["authorization"];
   if (authHeader === undefined) {
-    res.sendStatus(401);
+    res.sendStatus(401).send("Invalid token");
     return;
   }
   let token = authHeader.slice(7);
